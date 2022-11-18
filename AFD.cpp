@@ -16,7 +16,6 @@ using namespace std;
 int main()
 {
     int numero_estados, estado_inicial;
-    int estados_finais[];
 
 
     cout << "Numero N de estados do automato" << endl;
@@ -25,7 +24,8 @@ int main()
     cout << "Estado Inicial" << endl;
     cin >> estado_inicial;
 
-
+    int estados_finais[numero_estados];
+    cout <<"Estados Finais" << endl;
 
     return 0;
 }
