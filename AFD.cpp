@@ -21,6 +21,7 @@ int main()
     int numero_estados, estado_inicial;
     string string_leitura;
     string string_leitura2;
+    string string_leitura3;
 
     cout << "Numero N de estados do automato" << endl;
     cin >> numero_estados;
@@ -75,19 +76,19 @@ int main()
     cin >> quantidade_transicao;
 
     //matriz com as transicoes
-    int transition[numero_estados][simbolos.size()];
+
+    //int transition[numero_estados][simbolos.size()];
+
 
     cout << "Transicoes (estado atual, simbolo) -> estado destino" << endl;
 
     //loop para ler M transicoes
-    string string_leitura3;
-
-    for(int i=0; i<quantidade_transicao; i++)
+    for(int i=0; i<(quantidade_transicao + 1); i++)
     {
         getline(cin, string_leitura3);
         int estado_atual, estado_destino;
         char simbolo_atual;
-        sscanf(string_leitura3.c_str(),"(%d, %c) → %d", &estado_atual, &simbolo_atual, &estado_destino);
+        sscanf(string_leitura3.c_str(),"(%d, %c) -> %d", &estado_atual, &simbolo_atual, &estado_destino);
 
         cout << estado_atual <<" "<< simbolo_atual <<" "<< estado_destino << endl;
     }
