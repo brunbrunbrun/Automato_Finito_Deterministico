@@ -19,7 +19,7 @@ using namespace std;
 int main()
 {
     int numero_estados, estado_inicial;
-    string recebimento_estados_finais;
+    string string_leitura;
 
     cout << "Numero N de estados do automato" << endl;
     cin >> numero_estados;
@@ -27,14 +27,14 @@ int main()
     cout << "Estado Inicial" << endl;
     cin >> estado_inicial;
 
-//lendo estados finais e separando eles em um vetor
+    //lendo estados finais e separando eles em um vetor
     cout <<"Estados Finais" << endl;
     cin.ignore();
-    getline(cin, recebimento_estados_finais);
+    getline(cin, string_leitura);
 
     vector<int> vect;
 
-    stringstream ss(recebimento_estados_finais);
+    stringstream ss(string_leitura);
 
     for (int i; ss >> i;) {
         vect.push_back(i);
@@ -46,6 +46,14 @@ int main()
         cout << vect[i] << endl;
 
 
+    //lendo os simbolos do alfabeto
+    cout <<"Simbolos (separados por virgula)"<<endl;
+    cin.ignore();
+    getline(cin, string_leitura);
+
+    vector<char> simbolos;
+
+    stringstream string_simbolos(string_leitura);
 
     return 0;
 }
