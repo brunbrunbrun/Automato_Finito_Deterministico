@@ -20,6 +20,7 @@ int main()
 {
     int numero_estados, estado_inicial;
     string string_leitura;
+    string string_leitura2;
 
     cout << "Numero N de estados do automato" << endl;
     cin >> numero_estados;
@@ -32,28 +33,40 @@ int main()
     cin.ignore();
     getline(cin, string_leitura);
 
-    vector<int> vect;
+    vector<int> estados_finais;
 
-    stringstream ss(string_leitura);
+    stringstream ss_estados_finais(string_leitura);
 
-    for (int i; ss >> i;) {
-        vect.push_back(i);
-        if (ss.peek() == ',')
-            ss.ignore();
+    for (int i; ss_estados_finais >> i;) {
+        estados_finais.push_back(i);
+        if (ss_estados_finais.peek() == ',')
+            ss_estados_finais.ignore();
     }
 
-    for (size_t i = 0; i < vect.size(); i++)
-        cout << vect[i] << endl;
+    //apenas pra mostrar que foi adicionado corretamente no vetor
+    for (size_t i = 0; i < estados_finais.size(); i++)
+        cout << estados_finais[i] << endl;
 
 
     //lendo os simbolos do alfabeto
     cout <<"Simbolos (separados por virgula)"<<endl;
-    cin.ignore();
-    getline(cin, string_leitura);
+    getline(cin, string_leitura2);
 
     vector<char> simbolos;
 
-    stringstream string_simbolos(string_leitura);
+    stringstream ss_simbolos(string_leitura2);
+
+    char palavra;
+    for (int i = 0; ss_simbolos >> palavra;i++)
+    {
+        simbolos.push_back(palavra);
+        if (ss_simbolos.peek() == ',')
+            ss_simbolos.ignore();
+    }
+
+    //apenas pra mostrar que foi adicionado corretamente no vetor
+    for (size_t i = 0; i < simbolos.size(); i++)
+        cout << simbolos[i] << endl;
 
     return 0;
 }
