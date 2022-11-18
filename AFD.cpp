@@ -27,20 +27,11 @@ int main()
     cout << "Estado Inicial" << endl;
     cin >> estado_inicial;
 
+//lendo estados finais e separando eles em um vetor
     cout <<"Estados Finais" << endl;
+    cin.ignore();
     getline(cin, recebimento_estados_finais);
 
-/*    stringstream ss(recebimento_estados_finais);
-    vector<string> result;
-
-    while(ss.good())
-    {
-        string substr;
-        getline(ss, substr, ',');
-        result.push_back(substr);
-    }
-*/
-    //string str = "1, 2, 3, 4, 5, 6";
     vector<int> vect;
 
     stringstream ss(recebimento_estados_finais);
