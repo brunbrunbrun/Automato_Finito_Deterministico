@@ -4,9 +4,9 @@ Automatos Finitos Deterministicos
 
 Alunos:
 Bruno Belo
-Matheus Parizotto
-Lucca Souza
 Lucas Freitas
+Lucca Souza
+Matheus Parizotto
 */
 #include <iostream>
 
@@ -26,6 +26,7 @@ int main()
 
     int estados_finais[numero_estados];
     cout <<"Estados Finais" << endl;
+
 
     return 0;
 }
