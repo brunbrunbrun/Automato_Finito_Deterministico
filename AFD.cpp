@@ -43,9 +43,9 @@ int main()
             ss_estados_finais.ignore();
     }
 
-    //apenas pra mostrar que foi adicionado corretamente no vetor
-    for (size_t i = 0; i < estados_finais.size(); i++)
-        cout << estados_finais[i] << endl;
+        //apenas pra mostrar que foi adicionado corretamente no vetor
+        for (size_t i = 0; i < estados_finais.size(); i++)
+            cout << estados_finais[i] << endl;
 
 
     //lendo os simbolos do alfabeto
@@ -64,9 +64,33 @@ int main()
             ss_simbolos.ignore();
     }
 
-    //apenas pra mostrar que foi adicionado corretamente no vetor
-    for (size_t i = 0; i < simbolos.size(); i++)
-        cout << simbolos[i] << endl;
+        //apenas pra mostrar que foi adicionado corretamente no vetor
+        for (size_t i = 0; i < simbolos.size(); i++)
+            cout << simbolos[i] << endl;
+
+
+    //transições
+    cout << "Numero M de transicoes" << endl;
+    int quantidade_transicao;
+    cin >> quantidade_transicao;
+
+    //matriz com as transicoes
+    int transition[numero_estados][simbolos.size()];
+
+    cout << "Transicoes (estado atual, simbolo) -> estado destino" << endl;
+
+    //loop para ler M transicoes
+    string string_leitura3;
+
+    for(int i=0; i<quantidade_transicao; i++)
+    {
+        getline(cin, string_leitura3);
+        int estado_atual, estado_destino;
+        char simbolo_atual;
+        sscanf(string_leitura3.c_str(),"(%d, %c) → %d", &estado_atual, &simbolo_atual, &estado_destino);
+
+        cout << estado_atual <<" "<< simbolo_atual <<" "<< estado_destino << endl;
+    }
 
     return 0;
 }
