@@ -80,7 +80,7 @@ int main()
 
     //matriz com as transicoes
     int quantos_simbolos = simbolos.size();
-    int transition[numero_estados-1][quantos_simbolos-1];
+    int transition[numero_estados][quantos_simbolos];
 
 
 
@@ -106,7 +106,8 @@ int main()
         cout << estado_atual <<" "<< simbolo_atual <<" "<< estado_destino << endl;
     }
 */
-
+//comment
+        cin.ignore();
     for(int i=0; i<numero_estados;i++)
     {
         for(int j = 0; j < quantos_simbolos; j++)
@@ -122,7 +123,7 @@ int main()
         }
     }
 
-
+    cout << "matriz com os destinos" << endl;
     for(int i = 0; i < numero_estados; i++)
     {
         for(int j=0; j< quantos_simbolos; j++)
