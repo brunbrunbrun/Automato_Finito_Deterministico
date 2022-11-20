@@ -13,9 +13,21 @@ Matheus Parizotto
 #include <string>
 #include <vector>
 #include <stdio.h>
+#include <algorithm>
 
 using namespace std;
 
+bool aceitas(int estado_atual, vector<int> estados_finais)
+{
+    if(find(estados_finais.begin(), estados_finais.end(), estado_atual) != estados_finais.end())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 
 int main()
 {
@@ -172,7 +184,18 @@ int main()
         cout << estado_atual << endl;
     }
 
-    cout << estado_atual << endl;
+    cout <<"Estado final: "<< estado_atual << endl;
+
+    bool aceitado = aceitas(estado_atual, estados_finais);
+
+    if (aceitado == true)
+    {
+        cout << "A entrada e ACEITA pelo automato" << endl;
+    }
+    else
+    {
+        cout << "A entrada e REJEITADA pelo automato" << endl;
+    }
 
     return 0;
 }
