@@ -35,6 +35,7 @@ int main()
     string string_leitura;
     string string_leitura2;
     string string_leitura3;
+    int index_simbolo;
 
     cout << "Numero N de estados do automato" << endl;
     cin >> numero_estados;
@@ -118,23 +119,41 @@ int main()
     }
 */
 
+
+
     cin.ignore();
 
     for(int i=0; i<numero_estados;i++)
     {
         for(int j = 0; j < quantos_simbolos; j++)
         {
-            getline(cin, string_leitura3);
-            int estado_atual, estado_destino;
-            char simbolo_atual;
-            sscanf(string_leitura3.c_str(),"(%d, %c) -> %d", &estado_atual, &simbolo_atual, &estado_destino);
-
-            transition[i][j] = int(estado_destino);
-            cout << estado_atual <<" "<< simbolo_atual <<" "<< estado_destino << endl;
-
+            transition[i][j] = 0;
         }
     }
 
+
+    for(int i=0; i<quantidade_transicao; i++)
+    {
+        getline(cin, string_leitura3);
+        int estado_atual, estado_destino;
+        char simbolo_atual;
+        sscanf(string_leitura3.c_str(),"(%d, %c) -> %d", &estado_atual, &simbolo_atual, &estado_destino);
+
+
+        for(int j = 0; j < quantos_simbolos; j++)
+        {
+            if(simbolo_atual == simbolos[j])
+            {
+                index_simbolo = j;
+            }
+        }
+
+        transition[estado_atual-1][index_simbolo] = estado_destino;
+
+        cout << estado_atual <<" "<< simbolo_atual <<" "<< estado_destino << endl;
+    }
+
+    // mostra a matriz de transicao na tela
     cout << "matriz com os destinos" << endl;
     for(int i = 0; i < numero_estados; i++)
     {
@@ -168,10 +187,9 @@ int main()
         }
 
 //AUTOMATO EM ACAO
-    int index_simbolo;
     int estado_atual = estado_inicial;
 
-    //checkar se n existe simbolos nao pertencentes
+    //checar se n existe simbolos nao pertencentes
     for(size_t i = 0; i < entrada.size(); i++)
     {
         if(find(simbolos.begin(), simbolos.end(), entrada[i]) != simbolos.end())
@@ -197,6 +215,15 @@ int main()
         }
 
         estado_atual = transition[estado_atual-1][index_simbolo];
+
+        //checar se a transicao for para vazio
+        if(estado_atual == 0)
+        {
+            cout << "Houve uma transicao para o vazio" << endl;
+            cout << "A entrada e REJEITADA pelo automato" << endl;
+            exit(1);
+        }
+
         cout << estado_atual << endl;
     }
 
