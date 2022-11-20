@@ -170,6 +170,22 @@ int main()
 //AUTOMATO EM ACAO
     int index_simbolo;
     int estado_atual = estado_inicial;
+
+    //checkar se n existe simbolos nao pertencentes
+    for(size_t i = 0; i < entrada.size(); i++)
+    {
+        if(find(simbolos.begin(), simbolos.end(), entrada[i]) != simbolos.end())
+        {
+            continue;
+        }
+        else
+        {
+            cout << "Simbolo inserido nao contido no alfabeto" << endl;
+            cout << "Entrada foi NEGADA" << endl;
+            exit(1);
+        }
+    }
+
     for(size_t i = 0; i < entrada.size(); i++)
     {
         for(int j = 0; j < quantos_simbolos; j++)
