@@ -106,8 +106,9 @@ int main()
         cout << estado_atual <<" "<< simbolo_atual <<" "<< estado_destino << endl;
     }
 */
-//comment
-        cin.ignore();
+
+    cin.ignore();
+
     for(int i=0; i<numero_estados;i++)
     {
         for(int j = 0; j < quantos_simbolos; j++)
@@ -133,6 +134,25 @@ int main()
         cout << endl;
     }
 
+    string string_leitura4;
+    cout << "Cadeia de entrada" << endl;
+    getline(cin, string_leitura4);
+
+    vector<char> entrada;
+
+    stringstream ss_entrada(string_leitura4);
+
+    char palavra2;
+    for (int i = 0; ss_entrada >> palavra2;i++)
+    {
+        entrada.push_back(palavra2);
+    //    if (ss_simbolos.peek() == ',')
+    //        ss_simbolos.ignore();
+    }
+
+        //apenas pra mostrar que foi adicionado corretamente no vetor
+        for (size_t i = 0; i < entrada.size(); i++)
+            cout << entrada[i] << endl;
 
 
     return 0;
