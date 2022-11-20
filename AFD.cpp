@@ -12,6 +12,7 @@ Matheus Parizotto
 #include <sstream>
 #include <string>
 #include <vector>
+#include <stdio.h>
 
 using namespace std;
 
@@ -75,23 +76,63 @@ int main()
     int quantidade_transicao;
     cin >> quantidade_transicao;
 
-    //matriz com as transicoes
 
-    //int transition[numero_estados][simbolos.size()];
+
+    //matriz com as transicoes
+    int quantos_simbolos = simbolos.size();
+    int transition[numero_estados-1][quantos_simbolos-1];
+
 
 
     cout << "Transicoes (estado atual, simbolo) -> estado destino" << endl;
 
     //loop para ler M transicoes
+
+/*
     for(int i=0; i<(quantidade_transicao + 1); i++)
     {
         getline(cin, string_leitura3);
         int estado_atual, estado_destino;
         char simbolo_atual;
+
+        //problema aq?
         sscanf(string_leitura3.c_str(),"(%d, %c) -> %d", &estado_atual, &simbolo_atual, &estado_destino);
+
+        //estado_atual = string_leitura3[1];
+        //simbolo_atual = string_leitura3[4];
+        //estado_destino = string_leitura3[10];
+
 
         cout << estado_atual <<" "<< simbolo_atual <<" "<< estado_destino << endl;
     }
+*/
+
+    for(int i=0; i<numero_estados;i++)
+    {
+        for(int j = 0; j < quantos_simbolos; j++)
+        {
+            getline(cin, string_leitura3);
+            int estado_atual, estado_destino;
+            char simbolo_atual;
+            sscanf(string_leitura3.c_str(),"(%d, %c) -> %d", &estado_atual, &simbolo_atual, &estado_destino);
+
+            transition[i][j] = int(estado_destino);
+            cout << estado_atual <<" "<< simbolo_atual <<" "<< estado_destino << endl;
+
+        }
+    }
+
+
+    for(int i = 0; i < numero_estados; i++)
+    {
+        for(int j=0; j< quantos_simbolos; j++)
+        {
+            cout << transition[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+
 
     return 0;
 }
