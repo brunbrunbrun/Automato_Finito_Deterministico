@@ -151,7 +151,9 @@ int main()
 
         //apenas pra mostrar que foi adicionado corretamente no vetor
         for (size_t i = 0; i < entrada.size(); i++)
+        {
             cout << entrada[i] << endl;
+        }
 
 //AUTOMATO EM ACAO
     int index_simbolo;
@@ -162,11 +164,12 @@ int main()
         {
             if (entrada[i] == simbolos[j])
             {
-                int index_simbolo = j;
+                index_simbolo = j;
             }
         }
 
-        estado_atual = transition[estado_atual][index_simbolo];
+        estado_atual = transition[estado_atual-1][index_simbolo];
+        cout << estado_atual << endl;
     }
 
     cout << estado_atual << endl;
