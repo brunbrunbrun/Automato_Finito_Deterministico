@@ -77,7 +77,6 @@ int main()
     cin >> quantidade_transicao;
 
 
-
     //matriz com as transicoes
     int quantos_simbolos = simbolos.size();
     int transition[numero_estados][quantos_simbolos];
@@ -154,6 +153,23 @@ int main()
         for (size_t i = 0; i < entrada.size(); i++)
             cout << entrada[i] << endl;
 
+//AUTOMATO EM ACAO
+    int index_simbolo;
+    int estado_atual = estado_inicial;
+    for(size_t i = 0; i < entrada.size(); i++)
+    {
+        for(int j = 0; j < quantos_simbolos; j++)
+        {
+            if (entrada[i] == simbolos[j])
+            {
+                int index_simbolo = j;
+            }
+        }
+
+        estado_atual = transition[estado_atual][index_simbolo];
+    }
+
+    cout << estado_atual << endl;
 
     return 0;
 }
