@@ -17,6 +17,7 @@ Matheus Parizotto
 
 using namespace std;
 
+//funcao para ver se o estado atual final da cadeia é um dos estados finais
 bool aceitas(int estado_atual, vector<int> estados_finais)
 {
     if(find(estados_finais.begin(), estados_finais.end(), estado_atual) != estados_finais.end())
@@ -35,6 +36,7 @@ int main()
     string string_leitura;
     string string_leitura2;
     string string_leitura3;
+    string string_leitura4;
     int index_simbolo;
 
     cout << "Numero N de estados do automato" << endl;
@@ -58,9 +60,9 @@ int main()
             ss_estados_finais.ignore();
     }
 
-        //apenas pra mostrar que foi adicionado corretamente no vetor
-        for (size_t i = 0; i < estados_finais.size(); i++)
-            cout << estados_finais[i] << endl;
+        //-----apenas pra mostrar que foi adicionado corretamente no vetor-----
+        //for (size_t i = 0; i < estados_finais.size(); i++)
+        //    cout << estados_finais[i] << endl;
 
 
     //lendo os simbolos do alfabeto
@@ -79,9 +81,9 @@ int main()
             ss_simbolos.ignore();
     }
 
-        //apenas pra mostrar que foi adicionado corretamente no vetor
-        for (size_t i = 0; i < simbolos.size(); i++)
-            cout << simbolos[i] << endl;
+        //------apenas pra mostrar que foi adicionado corretamente no vetor-----
+        //for (size_t i = 0; i < simbolos.size(); i++)
+        //    cout << simbolos[i] << endl;
 
 
     //transições
@@ -90,7 +92,7 @@ int main()
     cin >> quantidade_transicao;
 
 
-    //matriz com as transicoes
+    //criando a matriz com as transicoes
     int quantos_simbolos = simbolos.size();
     int transition[numero_estados][quantos_simbolos];
 
@@ -98,31 +100,11 @@ int main()
 
     cout << "Transicoes (estado atual, simbolo) -> estado destino" << endl;
 
-    //loop para ler M transicoes
-
-/*
-    for(int i=0; i<(quantidade_transicao + 1); i++)
-    {
-        getline(cin, string_leitura3);
-        int estado_atual, estado_destino;
-        char simbolo_atual;
-
-        //problema aq?
-        sscanf(string_leitura3.c_str(),"(%d, %c) -> %d", &estado_atual, &simbolo_atual, &estado_destino);
-
-        //estado_atual = string_leitura3[1];
-        //simbolo_atual = string_leitura3[4];
-        //estado_destino = string_leitura3[10];
-
-
-        cout << estado_atual <<" "<< simbolo_atual <<" "<< estado_destino << endl;
-    }
-*/
-
-
 
     cin.ignore();
 
+    //loop para preencher primeiramente todos os valores com 0
+    //zero é usado para indicar um estado vazio
     for(int i=0; i<numero_estados;i++)
     {
         for(int j = 0; j < quantos_simbolos; j++)
@@ -132,6 +114,8 @@ int main()
     }
 
 
+    //loop para inserir M transicoes na matriz
+    //transicoes não especificadas são automaticamente entendidas como uma transicao para o vazio
     for(int i=0; i<quantidade_transicao; i++)
     {
         getline(cin, string_leitura3);
@@ -150,10 +134,13 @@ int main()
 
         transition[estado_atual-1][index_simbolo] = estado_destino;
 
-        cout << estado_atual <<" "<< simbolo_atual <<" "<< estado_destino << endl;
+        //-----apenas para mostrar o simbolos que são extraidos da linha de texto contendo a transicao-----
+        //cout << estado_atual <<" "<< simbolo_atual <<" "<< estado_destino << endl;
     }
 
-    // mostra a matriz de transicao na tela
+
+    //-----apenas para mostrar a matriz de transicao na tela-----
+    /*
     cout << "matriz com os destinos" << endl;
     for(int i = 0; i < numero_estados; i++)
     {
@@ -163,33 +150,33 @@ int main()
         }
         cout << endl;
     }
+    */
 
-    string string_leitura4;
+
+    //leitura da cadeia de entrada
     cout << "Cadeia de entrada" << endl;
     getline(cin, string_leitura4);
 
+    //separando os simbolos e colocando-os individualmente em um vetor
     vector<char> entrada;
-
     stringstream ss_entrada(string_leitura4);
 
     char palavra2;
     for (int i = 0; ss_entrada >> palavra2;i++)
     {
         entrada.push_back(palavra2);
-    //    if (ss_simbolos.peek() == ',')
-    //        ss_simbolos.ignore();
     }
 
-        //apenas pra mostrar que foi adicionado corretamente no vetor
-        for (size_t i = 0; i < entrada.size(); i++)
-        {
-            cout << entrada[i] << endl;
-        }
+        //-----apenas pra mostrar que foi adicionado corretamente no vetor-----
+        //for (size_t i = 0; i < entrada.size(); i++)
+        //    cout << entrada[i] << endl;
+
 
 //AUTOMATO EM ACAO
     int estado_atual = estado_inicial;
 
     //checar se n existe simbolos nao pertencentes
+    //se um dos simbolos encontrados na cadeia de entrada não fizer parte do alfabeto a entrada é negada
     for(size_t i = 0; i < entrada.size(); i++)
     {
         if(find(simbolos.begin(), simbolos.end(), entrada[i]) != simbolos.end())
@@ -204,6 +191,9 @@ int main()
         }
     }
 
+
+    //percorre o vetor com toda a entrada e então dependendo do estado atual
+    //ele realiza a transicao para o estado de destino, virando esse o novo estado atual
     for(size_t i = 0; i < entrada.size(); i++)
     {
         for(int j = 0; j < quantos_simbolos; j++)
@@ -217,6 +207,8 @@ int main()
         estado_atual = transition[estado_atual-1][index_simbolo];
 
         //checar se a transicao for para vazio
+        //o estado 0 é considerado o estado vazio, se o estado atual alguma hora for vazio
+        //ele nunca saira deste estado vazio, assim a string seria rejeitada
         if(estado_atual == 0)
         {
             cout << "Houve uma transicao para o vazio" << endl;
@@ -224,11 +216,14 @@ int main()
             exit(1);
         }
 
-        cout << estado_atual << endl;
+        //-----apenas para mostrar para qual estados a cadeia esta indo a cada simbolo-----
+        //cout << estado_atual << endl;
     }
 
-    cout <<"Estado final: "<< estado_atual << endl;
+    //-----apenas para mostrar qual o estado em que o automato parou no ultimo simbolo da cadeia-----
+    //cout <<"Estado final: "<< estado_atual << endl;
 
+    //analisa se o ultimo estado, em que o automato parou, é um dos estados considerados como finais
     bool aceitado = aceitas(estado_atual, estados_finais);
 
     if (aceitado == true)
